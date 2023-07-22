@@ -9,30 +9,34 @@
  */
 int partition(int *arr, int start, int end, size_t size)
 {
-    int pivot = arr[end];
-    int pindex = start;
-    int i, temp;
+	int pivot = arr[end];
+	int pindex = start - 1;
+	int i, temp;
 
-    for (i = start; i < end; i++)
-    {
-        if (arr[i] <= pivot)
-        {
-            temp = arr[i];
-            arr[i] = arr[pindex];
-            arr[pindex] = temp;
-            pindex++;
-	    if(i > pindex)
-            {
-                print_array(arr, size);
-            }
-        }
-    }
-    temp = arr[end];
-    arr[end] = arr[pindex];
-    arr[pindex] = temp;
-    print_array(arr, size);
+	for (i = start; i < end; i++)
+	{
+		if (arr[i] <= pivot)
+		{
+			pindex++;
+			temp = arr[i];
+			arr[i] = arr[pindex];
+			arr[pindex] = temp;
 
-    return pindex;
+			if(pindex != i)
+			{
+				print_array(arr, size);
+			}
+		}
+	}
+	temp = arr[end];
+	arr[end] = arr[pindex + 1];
+	arr[pindex + 1] = temp;
+	if(end != (pindex + 1))
+	{
+		print_array(arr, size);
+	}
+
+	return (pindex + 1);
 }
 
 /**
@@ -44,14 +48,14 @@ int partition(int *arr, int start, int end, size_t size)
  */
 void quick_sort_helper(int *array, int start, int end ,size_t size)
 {   
-   
-    if (start < end)
-    {
-        int pindex = partition(array, start, end, size);
-        quick_sort_helper(array, start, pindex - 1, size);
-        quick_sort_helper(array, pindex + 1, end, size);
-       
-    }
+
+	if (start < end)
+	{
+		int pindex = partition(array, start, end, size);
+		quick_sort_helper(array, start, pindex - 1, size);
+		quick_sort_helper(array, pindex + 1, end, size);
+
+	}
 }
 
 /**
@@ -62,5 +66,10 @@ void quick_sort_helper(int *array, int start, int end ,size_t size)
  */
 void quick_sort(int *array, size_t size)
 {   
-    quick_sort_helper(array, 0, size -1 , size);
+	quick_sort_helper(array, 0, size -1 , size);
 }
+
+
+
+
+
