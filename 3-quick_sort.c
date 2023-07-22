@@ -21,6 +21,10 @@ int partition(int *arr, int start, int end, size_t size)
             arr[i] = arr[pindex];
             arr[pindex] = temp;
             pindex++;
+	    if(i > pindex)
+            {
+                print_array(arr, size);
+            }
         }
     }
     temp = arr[end];
