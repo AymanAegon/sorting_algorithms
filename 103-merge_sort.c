@@ -33,9 +33,9 @@ void merge(int *array, int *a, size_t begin, size_t mid, size_t end)
 	j = mid;
 	k = begin;
 	merging_status(a, begin, mid, end);
-	while (i < mid && j < end)
+	while (i < mid && j < end && k < end)
 	{
-		if (a[i] < a[j])
+		if (a[i] <= a[j])
 		{
 			array[k] = a[i];
 			i++;
@@ -100,4 +100,5 @@ void merge_sort(int *array, size_t size)
 	for (i = 0; i < size; i++)
 		a[i] = array[i];
 	merge_sort_function(array, a, 0, size);
+	free(a);
 }
